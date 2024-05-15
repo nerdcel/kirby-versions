@@ -44,6 +44,24 @@ This plugin is made for you if you have one or multiple of the use cases describ
 
 Support for older Kirby versions is provided by previous versions of this plugin. I recommend to update your Kirby installation to benefit from fixes and improvements both in Kirby and in this plugin.
 
+## Troubleshooting
+
+### Issue: "packfile cannot be mapped: Cannot allocate memory"
+
+If you encounter the error `packfile ./.git/objects/pack/{hash}.pack cannot be mapped: Cannot allocate memory` while running your application on a shared virtual server due to the project size increase, you can resolve it by adjusting Git settings.
+
+To prevent this error, you can optimize Git by dividing the `.pack` files into smaller sizes. Use the following commands to address this problem:
+
+```bash
+git config pack.windowMemory "100m"
+git config pack.packSizeLimit "100m"
+```
+
+After adjusting the Git configurations, it's recommended to clean up the pack file by executing the following command:
+```bash
+git gc --prune=now
+```
+
 ## Documentation
 
 The [plugin documentation](https://github.com/lukasbestle/kirby-versions/wiki) will show you how to set up the plugin initially, how to configure common and advanced features and how to use the plugin.
